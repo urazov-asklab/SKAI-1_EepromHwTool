@@ -6,13 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <EditText
+        android:id="@+id/editTextOffset"
+        android:layout_width="271dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="1dp"
+        android:hint="Оффсет"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextSize"
+        android:layout_width="271dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="1dp"
+        android:hint="Размер (для чтения)"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextRW"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextOffset" />
+
+    <EditText
+        android:id="@+id/editTextRW"
+        android:layout_width="271dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="1dp"
+        android:hint="Текст"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRead"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSize" />
+
+    <Button
+        android:id="@+id/buttonRead"
+        android:layout_width="271dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="1dp"
+        android:text="Прочитать"
+        app:layout_constraintBottom_toTopOf="@+id/buttonWrite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRW" />
+
+    <Button
+        android:id="@+id/buttonWrite"
+        android:layout_width="271dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="1dp"
+        android:text="Записать"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRead" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
