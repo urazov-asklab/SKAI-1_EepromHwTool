@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 byte[] bytes = editTextRW.getText().toString().getBytes(StandardCharsets.UTF_8);
                 try {
                     RandomAccessFile file = new RandomAccessFile(pathFile, "rw");
-                    file.read(bytes, offset, bytes.length);
+                    file.seek(offset);
+                    file.write(bytes, 0, bytes.length);
                     file.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -60,18 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 int offset   = Integer.parseInt(editTextOffset.getText().toString());
                 int size     = Integer.parseInt(editTextSize.getText().toString());
                 byte[] bytes = new byte[size];
-                int sizeRead = 10;
-                byte[] bufferRead = new byte[sizeRead];
+                int currentSizeRead = 32;
                 try {
                     RandomAccessFile file = new RandomAccessFile(pathFile, "r");
-                    int counter = offset;
-                    while (counter < offset + size) {
-                        if (counter + 10 >= offset + size)
-                            sizeRead = offset + size - counter;
-                        file.read(bufferRead, counter, sizeRead);
-                        System.arraycopy(bufferRead,0, bytes, counter - offset, sizeRead);
-                        counter += sizeRead;
-                    };
+                    int currentOffset = offset;
+                    while (currentOffset < (offset + size)) {
+                        if ((currentOffset + 32) > (offset + size))
+                            currentSizeRead = (offset + size) - currentOffset;
+                        file.seek(currentOffset);
+                        file.read(bytes, currentOffset - offset, currentSizeRead);
+                        currentOffset += currentSizeRead;
+                    }
                     file.close();
                     String str = new String(bytes, StandardCharsets.UTF_8);
                     editTextRW.setText(str);
