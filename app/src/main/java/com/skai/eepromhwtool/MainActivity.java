@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextSize;
     private EditText editTextRW;
 
-    private String pathFile = "/sys/bus/nvmem/devices/6-00570/nvmem";
+    private String pathFile = "/sys/bus/nvmem/devices/1-00570/nvmem";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
