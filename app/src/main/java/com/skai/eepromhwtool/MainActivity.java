@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-//import android.os.ServiceManager;
-//import android.os.IEepromHwService;
-//import android.app.EepromHwServiceManger;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,25 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
     private String pathFile = "/sys/bus/nvmem/devices/6-00570/nvmem";
 
-    //private IEepromHwService eepromHwService = null;
-    //private EepromHwServiceManger eepromHwServiceManger = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // находим элементы
         buttonRead     = (Button)findViewById(R.id.buttonRead);
         buttonWrite    = (Button)findViewById(R.id.buttonWrite);
         editTextOffset = (EditText)findViewById(R.id.editTextOffset);
         editTextSize   = (EditText)findViewById(R.id.editTextSize);
         editTextRW     = (EditText)findViewById(R.id.editTextRW);
 
-        //eepromHwService = IEepromHwService.Stub.asInterface(ServiceManager.getService("eepromhwservicemanger"));
-        //eepromHwServiceManger = (EepromHwServiceManger) getSystemService("eepromhwservicemanger");
-
-        // прописываем обработчик
         View.OnClickListener clickButtonWrite = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     RandomAccessFile file = new RandomAccessFile(pathFile, "rw");
                     file.read(bytes, offset, bytes.length);
                     file.close();
-                    //File file    = new File(pathFile);
-                    //BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(file));
-                    //buf.write(bytes, offset, bytes.length);
-                    //buf.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -86,13 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         file.read(bufferRead, counter, sizeRead);
                         System.arraycopy(bufferRead,0, bytes, counter - offset, sizeRead);
                         counter += sizeRead;
-                    }
-                    //file.read(bytes, offset, bytes.length);
+                    };
                     file.close();
-                    //File file    = new File(pathFile);
-                    //BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file), 1);
-                    //buf.read(bytes, offset, bytes.length);
-                    //buf.close();
                     String str = new String(bytes, StandardCharsets.UTF_8);
                     editTextRW.setText(str);
                 } catch (FileNotFoundException e) {
